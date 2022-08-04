@@ -2,27 +2,22 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const myLogger = function (req, res, next) {
-    console.log('LOGGED')
+const requestLogging = function (req, res, next) {
+    let scheme = req.protocol
+    let host = req.headers.host
+    let url = req.url
+    console.log(`Request URL: ${scheme}://${host}${url}`)
     next()
 }
 
-const requestTime = function (req, res, next) {
-    req.requestTime = Date.now()
-    next()
-}
-
-app.use(myLogger)
-app.use(requestTime)
+app.use(requestLogging)
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/request-time', (req, res) => {
-    let responseText = 'Hello World!<br>'
-    responseText += `<small>Requested at: ${req.requestTime}</small>`
-    res.send(responseText)
+app.get('/about', (req, res) => {
+    res.send('About page')
 })
 
 app.listen(port, () => {
