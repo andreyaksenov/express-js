@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const fs = require('fs')
 const multer = require('multer')
 const app = express()
 const port = 3000
@@ -21,7 +22,8 @@ app.post('/urlencoded', bodyParser.urlencoded({extended: true}), (req, res) => {
 
 app.post('/raw', bodyParser.raw({type: () => true}), (req, res) => {
     let rawBody = req.body
-    res.send(rawBody.toString())
+    fs.createWriteStream('./uploads/ktor_logo.png').write(rawBody)
+    res.send('A file is uploaded')
 })
 
 const storage = multer.diskStorage({
@@ -31,7 +33,7 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage: storage});
-app.post('/upload', upload.single('image'), function (req, res, next) {
+app.post('/multipart', upload.single('image'), function (req, res, next) {
     let fileDescription = req.body["description"]
     let fileName = req.file.filename
     res.send(`${fileDescription} is uploaded to uploads/${fileName}`)

@@ -23,7 +23,14 @@ username=JetBrains&email=example@jetbrains.com&password=foobar&confirmation=foob
 
 ###
 
-POST http://localhost:3000/upload
+POST http://localhost:3000/raw
+Content-Type: application/octet-stream
+
+< ./ktor_logo.png
+
+###
+
+POST http://localhost:3000/multipart
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
