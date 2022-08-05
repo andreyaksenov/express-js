@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require("path");
+const path = require("path")
 const app = express()
 const port = 3000
 
@@ -17,7 +17,7 @@ app.get('/file-attachment', (req, res) => {
 })
 
 app.get('/old', (req, res) => {
-    res.redirect("moved")
+    res.redirect(301, "moved")
 })
 
 app.get('/moved', (req, res) => {
