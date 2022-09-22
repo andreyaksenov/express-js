@@ -9,11 +9,11 @@ app.get('/json', (req, res) => {
 })
 
 app.get('/file', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'ktor_logo.png'))
+    res.sendFile(path.join(__dirname, 'ktor_logo.png'))
 })
 
 app.get('/file-attachment', (req, res) => {
-    res.download("public/ktor_logo.png")
+    res.download("ktor_logo.png")
 })
 
 app.get('/old', (req, res) => {

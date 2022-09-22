@@ -6,6 +6,8 @@ const port = 3000
 app.get('/user/:login', (req, res) => {
     if (req.params['login'] === 'admin') {
         res.send('You are logged in as Admin')
+    } else {
+        res.send('You are logged in as Guest')
     }
 })
 
